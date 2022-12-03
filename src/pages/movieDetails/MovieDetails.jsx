@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { fetchMovie } from '../../utils/fetchApi';
-import { StyledMovieDetails } from './MovieDetails.styled';
+import { StyledGoBackBtn, StyledMovieDetails } from './MovieDetails.styled';
+import { ReactComponent as ArrowLeft } from '../../icons/chevronleft.svg';
+
 
 const baseURL = 'https://image.tmdb.org/t/p/original';
 
@@ -15,7 +17,6 @@ export default function MovieDetails() {
   const { poster_path, title, vote_average, overview, genres } = movie;
   return (
     <>
-      <button type="button">Go back</button>
       <StyledMovieDetails>
         <img
           className="poster"
@@ -25,10 +26,16 @@ export default function MovieDetails() {
           height="450"
         />
         <div className="movieInfo">
-          <h1 className="movieTitle">{title}</h1>
+          <div className='wrap'>
+            <h1 className="movieTitle">{title}</h1>
+            <StyledGoBackBtn type="button">
+              <ArrowLeft height="20" />
+              <span>Go back</span>
+            </StyledGoBackBtn>
+          </div>
           <p className="text">
-            Vote average:
-            <span> {vote_average}</span>
+            User score:
+            <span> {Math.round(vote_average*10)}%</span>
           </p>
           <h2 className="subtitle">Overview</h2>
           <p className="text">{overview}</p>
@@ -37,7 +44,7 @@ export default function MovieDetails() {
             {genres && genres.map(item => item.name).join(' ')}
           </p>
           <h3 className="subtitle">Additional information</h3>
-          <div className='linkWrap'>
+          <div className="linkWrap">
             <Link to="cast" className="link">
               Cast
             </Link>

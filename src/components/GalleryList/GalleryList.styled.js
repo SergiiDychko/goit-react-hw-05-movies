@@ -10,4 +10,5 @@ display: flex;
 gap: 30px;
 flex-wrap: wrap;
 justify-content: space-around;
+padding-bottom: 30px;
 `

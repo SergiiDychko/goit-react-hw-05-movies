@@ -1,5 +1,5 @@
 import { StyledItem } from './GalleryItem.styled';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const baseURL = 'https://image.tmdb.org/t/p/original';
 export default function GalleryItem({

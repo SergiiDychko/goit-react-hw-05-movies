@@ -15,15 +15,22 @@ export default function Cast() {
 
   return (
     <StyledCast>
-      {cast &&
+      {cast.length !== 0 ? (
         cast.map(({ profile_path, original_name, character, id }) => (
           <CastItem
             key={id}
-            imgSrc={profile_path ? (baseURL + profile_path) : null}
+            imgSrc={profile_path ? baseURL + profile_path : null}
             name={original_name}
             character={character}
           />
-        ))}
+        ))
+      ) : (
+        <li>
+          <p className="notify">
+            We don't have any cast information for this movie.
+          </p>
+        </li>
+      )}
     </StyledCast>
   );
 }
