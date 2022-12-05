@@ -9,6 +9,6 @@ export const StyledList = styled.ul`
 display: flex;
 gap: 30px;
 flex-wrap: wrap;
-justify-content: space-around;
+justify-content: space-evenly;
 padding-bottom: 30px;
 `

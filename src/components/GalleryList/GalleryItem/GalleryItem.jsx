@@ -1,19 +1,26 @@
 import { StyledItem } from './GalleryItem.styled';
-import { Link, useParams } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
+import defaultPoster from '../../../images/NoImageAvailable.jpg';
 const baseURL = 'https://image.tmdb.org/t/p/original';
+
 export default function GalleryItem({
   id,
   imgSrc,
   title = 'unknown name',
   text = 'no description',
 }) {
+  const location = useLocation()
+  
   return (
     <StyledItem>
-      <Link className='link' to={`movies/${id}`}>
+      <Link
+        className="link"
+        to={location.pathname === '/' ? `movies/${id}` : `${id}`}
+        state={{ from: location }}
+      >
         <img
           className="poster"
-          src={baseURL + imgSrc}
+          src={imgSrc ? baseURL + imgSrc : defaultPoster}
           alt={title}
           width="150"
           height="200"

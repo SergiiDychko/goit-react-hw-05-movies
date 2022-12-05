@@ -8,7 +8,7 @@ export default function Loader() {
         height="80"
         width="80"
         radius="9"
-        color="rgba(60, 80, 180, 0.4)"
+        color="greenyellow"
         ariaLabel="three-dots-loading"
       />
     </StyledLoader>
