@@ -15,7 +15,7 @@ export default function GalleryItem({
     <StyledItem>
       <Link
         className="link"
-        to={location.pathname === '/' ? `movies/${id}` : `${id}`}
+        to={`/movies/${id}`}
         state={{ from: location }}
       >
         <img
