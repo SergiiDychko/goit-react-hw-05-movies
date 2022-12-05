@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { fetchMovie } from '../../utils/fetchApi';
 import Loader from '../../components/Loader';
 import { StyledMovieDetails, StyledNotify } from './MovieDetails.styled';
 import { ReactComponent as ArrowLeft } from '../../icons/chevronleft.svg';
 import sadFrog from '../../images/sadFrog.png';
+import defaultPoster from '../../images/NoImageAvailable.jpg';
 
 const baseURL = 'https://image.tmdb.org/t/p/original';
 
@@ -27,12 +28,11 @@ export default function MovieDetails() {
   }, [movieId]);
   return (
     <>
-      {loading && <Loader />}
       {movie !== '' && (
         <StyledMovieDetails>
           <img
             className="poster"
-            src={baseURL + poster_path}
+            src={poster_path ? baseURL + poster_path : defaultPoster}
             alt={title}
             width="300"
             height="450"
@@ -71,11 +71,15 @@ export default function MovieDetails() {
           </div>
         </StyledMovieDetails>
       )}
-      {!loading && movie === '' && <StyledNotify>
-        <img src={sadFrog} alt="sad frog" width="100" />
-        <span>We don't have any information about this movie</span>
-      </StyledNotify>}
-      <Outlet />
+      {!loading && movie === '' && (
+        <StyledNotify>
+          <img src={sadFrog} alt="sad frog" width="100" />
+          <span>We don't have any information about this movie</span>
+        </StyledNotify>
+      )}
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

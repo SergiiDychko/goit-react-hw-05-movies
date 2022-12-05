@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import Loader from '../Loader';
 import { Container, Header, Logo, Link } from './SharedLayout.styles';
 
 export default function SharedLayout() {
@@ -13,7 +15,9 @@ export default function SharedLayout() {
           <span>GOIT</span> MOVIE DATABASE
         </Logo>
       </Header>
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 }

@@ -23,7 +23,7 @@ export default function Cast() {
     <>
       {loading && <Loader />}
       <StyledCast>
-        {cast.length !== 0 ? (
+        {cast.length !== 0 &&
           cast.map(({ profile_path, original_name, character, id }) => (
             <CastItem
               key={id}
@@ -31,8 +31,8 @@ export default function Cast() {
               name={original_name}
               character={character}
             />
-          ))
-        ) : (
+          ))}
+        {!loading && cast.length === 0 && (
           <li>
             <p className="notify">
               We don't have any cast information for this movie.

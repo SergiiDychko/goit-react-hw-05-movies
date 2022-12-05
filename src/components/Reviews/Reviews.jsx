@@ -23,20 +23,19 @@ export default function Reviews() {
     <>
       {loading && <Loader />}
       <StyledReviews>
-        {reviews.length !== 0 ? (
-          reviews.map(({ author_details, content, created_at, id }) => (
+        {reviews.length !== 0 &&
+          reviews.map(({ author_details, content, created_at, id }) =>
             <ReviewItem
               key={id}
               author={author_details}
               content={content}
               date={created_at}
             />
-          ))
-        ) : (
-          <li>
+          )}
+        {!loading && reviews.length === 0 && <li>
             <p className="notify">We don't have any reviews for this movie.</p>
           </li>
-        )}
+        }
       </StyledReviews>
     </>
   );
